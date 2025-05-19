@@ -17,8 +17,10 @@ public:
 		Node* temp = head;
 		int count = a;
 		while (head != tail) {
-			for (int i = 0; i < count; i++) {
+			int i = 0;
+			while (i < count) {
 				temp = temp->next;
+				i++;
 			}
 			int b = temp->data;
 			deleteValue(b);
@@ -123,7 +125,7 @@ bool myLL::search(int value)
 
 			temp = temp->next;
 
-			if (temp == nullptr)
+			if (temp == tail)
 				return false;
 		}
 	}
@@ -151,7 +153,7 @@ int myLL::deleteFromHead()
 		head = head->next;
 		delete temp;
 		temp = nullptr;
-
+		tail->next = head;
 		return returningValue;
 
 	}
@@ -188,7 +190,7 @@ int myLL::deleteFromTail()
 		int returningValue = tail->data;
 		delete tail;
 		tail = temp;
-		temp->next = nullptr;
+		tail->next = head;
 		return returningValue;
 
 	}
@@ -213,7 +215,7 @@ void myLL::display()
 			cout << temp->data << endl;
 			temp = temp->next;
 
-			if (temp == nullptr)
+			if (temp == tail)
 				break;
 		}
 	}
@@ -229,6 +231,7 @@ void myLL::insertAtTail(int value)
 	{
 		head = nn;
 		tail = nn;
+		
 	}
 
 	else //non-empty LL
